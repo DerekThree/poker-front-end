@@ -1,2 +1,12 @@
-<button (click)="sendRequest()">Check Back End</button>
-<div>{{ response }}</div>
+<div class="container">
+  <h1>{{ title }}</h1>
+  <button (click)="sendRequest()">Send Request</button>
+  <p>{{ response }}</p>
+
+  <div class="card-container">
+    <app-card *ngFor="let card of cards" [suit]="card.suit" [value]="card.value"></app-card>
+  </div>
+  <div class="chance">
+    Chance to win: 50%
+  </div>
+</div>
