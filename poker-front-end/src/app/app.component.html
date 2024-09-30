@@ -4,7 +4,17 @@
   <p>{{ response }}</p>
 
   <div class="card-container">
-    <app-card *ngFor="let card of cards" [suit]="card.suit" [value]="card.value"></app-card>
+    <div *ngFor="let card of cards; let i = index" class="card-wrapper">
+      <app-card [suit]="card.suit" [value]="card.value"></app-card>
+      <div class="dropdowns">
+        <select [(ngModel)]="cards[i].suit">
+          <option *ngFor="let suit of suits" [value]="suit">{{ suit }}</option>
+        </select>
+        <select [(ngModel)]="cards[i].value">
+          <option *ngFor="let value of values" [value]="value">{{ value }}</option>
+        </select>
+      </div>
+    </div>
   </div>
   <div class="chance">
     Chance to win: 50%
