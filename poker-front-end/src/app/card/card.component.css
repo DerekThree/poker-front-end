@@ -1,8 +1,10 @@
 .card {
   border: 1px solid #000;
   border-radius: 8px;
-  width: 100px;
-  height: 150px;
+  width: 10vw;
+  min-width: 40px;
+  height: 15vw;
+  min-height: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
