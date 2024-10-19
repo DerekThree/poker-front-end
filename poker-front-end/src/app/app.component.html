@@ -3,7 +3,7 @@
   <div class="card-container">
     <div *ngFor="let card of cards; let i = index" class="card-wrapper">
       <app-card [suit]="card.suit" [value]="card.value"></app-card>
-      <div class="dropdowns">
+      <div class="dropdown-pair">
         <select [(ngModel)]="cards[i].suit" class="dropdown suit-dropdown">
           <option *ngFor="let suit of suits" [value]="suit">{{ suit }}</option>
         </select>
