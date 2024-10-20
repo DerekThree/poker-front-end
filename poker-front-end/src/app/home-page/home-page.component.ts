@@ -6,13 +6,13 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-home-page',
   standalone: true,
   imports: [RouterOutlet, CardComponent, CommonModule, FormsModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  templateUrl: './home-page.component.html',
+  styleUrl: './home-page.component.css'
 })
-export class HomeComponent {
+export class HomePageComponent {
 
   title = 'Poker Odds Calculator';
   response: string = "";
