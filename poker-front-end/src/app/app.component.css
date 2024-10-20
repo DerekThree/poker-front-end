@@ -24,8 +24,9 @@ body {
 }
 
 h1 {
-  font-size: 24px;
+  font-size: 48px;
   margin-bottom: 20px;
+  color: yellow;
 }
 
 .card-container {
@@ -91,6 +92,15 @@ h1 {
 .dropdown:focus {
   outline: none; /* Remove grey rectangle on focus */
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.response {
+  color: yellow;
+}
+
+.chance {
+  font-size: 24px;
+  color: yellow;
 }
 
 .send-request-button {
