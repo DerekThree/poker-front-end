@@ -2,6 +2,6 @@
 body {
   background-image: url('assets/PNG/poker.jpg');
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-position: center;
 }
