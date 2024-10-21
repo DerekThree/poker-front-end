@@ -1,0 +1,62 @@
+/* Dropdown container */
+.top-bar {
+  position: relative;
+  display: flex;
+  justify-content: flex-end; /* Align elements to the right */
+  align-items: center;
+  padding: 20px;
+  /* background-color: #f8f9fa; */
+}
+
+/* Dropdown button */
+.dropbtn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.dropbtn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.dropbtn:active {
+  background-color: #004085;
+  transform: scale(1);
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  /* min-width: 160px; */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 12px;
+  right: -5px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-radius: 12px;
+}
+
+.dropdown-content a:hover {
+  background-color: #0056b3;
+}
+
+/* Show the dropdown menu when the button is clicked */
+.show {
+  display: block;
+}

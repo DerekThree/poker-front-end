@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background-image: url('assets/backgrounds/poker.jpg');
+  background-image: url('./assets/backgrounds/poker.jpg');
   background-size: cover;
-  background-repeat: repeat;
+  /* background-repeat: repeat; */
   background-position: center;
+  height: 100vh;
 }

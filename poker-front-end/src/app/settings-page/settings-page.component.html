@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="p-4 text-center yellow">
+    <h1>Settings</h1>
+    <h2>Select Background Image</h2>
+  </div>
+
+  <form id="fileUploadForm">
+    <div class="mb-3">
+      <label for="fileUpload" class="form-label yellow">Select a file to upload</label>
+      <input type="file" id="fileUpload" class="form-control" required />
+    </div>
+    <div class="d-grid gap-2">
+      <button type="submit" class="upload-button">Upload file</button>
+    </div>
+  </form>
+
+  <br /><br />
+  <label for="fileTable" class="form-label yellow">Uploaded files</label>
+  <div class="tablecontainer">
+    <table id="fileTable" class="table table-striped">
+      <thead>
+          <th class="header">Name</th>
+          <th class="header">Size</th>
+          <th class="header">Download</th>
+          <th class="header">Delete</th>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div id="uploadStatus" class="mt-3"></div>
+</div>
