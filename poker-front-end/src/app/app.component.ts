@@ -12,7 +12,7 @@ import { TopBarComponent } from "./top-bar/top-bar.component";
 export class AppComponent {
 
   constructor() {
-    this.setBackground(localStorage.getItem('backgroundFileUrl')!);
+    this.setBackground(localStorage.getItem('backgroundFileUrl') || './assets/backgrounds/default.jpg');
   }
 
   setBackground(fileUrl: string) {
