@@ -9,4 +9,16 @@ import { TopBarComponent } from "./top-bar/top-bar.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {}
+export class AppComponent {
+
+  constructor() {
+    this.setBackground(localStorage.getItem('backgroundFileUrl')!);
+  }
+
+  setBackground(fileUrl: string) {
+    document.body.style.backgroundImage = `url(${fileUrl})`;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundRepeat = 'no-repeat';
+    document.body.style.backgroundPosition = 'center';
+  }
+}

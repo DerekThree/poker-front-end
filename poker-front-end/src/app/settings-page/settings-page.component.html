@@ -4,15 +4,13 @@
     <h2>Select Background Image</h2>
   </div>
 
-  <form id="fileUploadForm">
     <div class="mb-3">
       <label for="fileUpload" class="form-label yellow">Select a file to upload</label>
       <input type="file" id="fileUpload" class="form-control" required />
     </div>
     <div class="d-grid gap-2">
-      <button type="submit" class="upload-button">Upload file</button>
+      <button (click)="uploadFile('derek-poker-backgrounds')" class="upload-button">Upload file</button>
     </div>
-  </form>
 
   <br /><br />
   <label for="fileTable" class="form-label yellow">Uploaded files</label>
@@ -23,6 +21,7 @@
           <th class="header">Size</th>
           <th class="header">Download</th>
           <th class="header">Delete</th>
+          <th class="header">Activate</th>
       </thead>
       <tbody></tbody>
     </table>
