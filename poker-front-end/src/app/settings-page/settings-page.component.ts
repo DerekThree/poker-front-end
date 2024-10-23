@@ -47,11 +47,6 @@ export class SettingsPageComponent {
             fileNameCell.textContent = object.Key ?? ''
             fileRow.appendChild(fileNameCell)
 
-            // Size
-            const fileSizeCell= document.createElement('td')
-            fileSizeCell.textContent = object.Size?.toString() ?? ''
-            fileRow.appendChild(fileSizeCell)
-
             // Download
             var downloadCell = document.createElement('td');
             var downloadLink = document.createElement('a');
@@ -147,7 +142,7 @@ export class SettingsPageComponent {
   setBackground(fileUrl: string) {
     document.body.style.backgroundImage = `url(${fileUrl})`;
     document.body.style.backgroundSize = 'cover';
-    document.body.style.backgroundRepeat = 'no-repeat';
+    // document.body.style.backgroundRepeat = 'no-repeat';
     document.body.style.backgroundPosition = 'center';
   }
 }
