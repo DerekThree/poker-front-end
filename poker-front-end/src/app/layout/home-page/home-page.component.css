@@ -1,0 +1,133 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  /* background-color: #f8f9fa; */
+  color: #343a40;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.page {
+  /* background-color: #ffffff; */
+  /* border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  /* padding: 20px; */
+  max-width: 90vw;
+  width: 95%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: 1em;
+  color: yellow;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Allow cards to wrap if they exceed container width */
+  justify-content: center; /* Center the cards horizontally */
+  width: 100%;
+  margin-bottom: 2em;
+}
+
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 15vw;
+  max-width: 300px;
+  min-width: 140px;
+}
+
+.dropdown-pair {
+  display: flex;
+  width: 12vw; 
+  min-width: 80px;
+  margin: 8px 0;
+}
+
+.dropdown {
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  color: white;
+  padding: 8px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  flex: 1; /* Ensure dropdowns share the available space equally */
+  outline: none; /* Remove default outline */
+  appearance: none; /* Remove default dropdown arrow */
+  border-radius: 0; /* Remove default border radius */
+  text-align-last: center; /* Center the selected option text */
+}
+
+.suit-dropdown {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.value-dropdown {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  margin-left: -1px; /* To ensure the dropdowns touch each other */
+}
+
+.dropdown:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+  outline: none; /* Remove grey rectangle on hover */
+}
+
+.dropdown:active {
+  background-color: #004085;
+  transform: scale(1);
+  outline: none; /* Remove grey rectangle on active */
+}
+
+.dropdown:focus {
+  outline: none; /* Remove grey rectangle on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.response {
+  color: yellow;
+}
+
+.chance {
+  font-size: 24px;
+  color: yellow;
+}
+
+.send-request-button {
+  background-color: #dc3545; /* Change to red */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.send-request-button:hover {
+  background-color: #c82333; /* Darker red on hover */
+  transform: scale(1.05);
+}
+
+.send-request-button:active {
+  background-color: #bd2130; /* Even darker red on active */
+  transform: scale(1);
+}

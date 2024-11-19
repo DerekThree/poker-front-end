@@ -1,0 +1,53 @@
+.container {
+  max-width: 60vw;
+  min-width: 25em;
+}
+
+.yellow {
+  color: yellow;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+.upload-button {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.upload-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
+}
+
+.upload-button:active {
+  background-color: #004085;
+  transform: scale(1);
+}
+
+.form-control {
+  border-radius: 12px;
+  transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.form-control:hover {
+  transform: scale(1.02);
+
+}
+
+.tablecontainer {
+  padding: 1px 0;
+  background-color: white;
+  border-radius: 12px;
+}
+
+.header {
+  padding: .5rem;
+}

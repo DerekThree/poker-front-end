@@ -1,0 +1,22 @@
+<div class="page">
+  <h1>{{ title }}</h1>
+  <div class="card-container">
+    <div *ngFor="let card of cards; let i = index" class="card-wrapper">
+      <app-card [suit]="card.suit" [value]="card.value"></app-card>
+      <div class="dropdown-pair">
+        <select [(ngModel)]="cards[i].suit" class="dropdown suit-dropdown">
+          <option *ngFor="let suit of suits" [value]="suit">{{ suit }}</option>
+        </select>
+        <select [(ngModel)]="cards[i].value" class="dropdown value-dropdown">
+          <option *ngFor="let value of values" [value]="value">{{ value }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <p></p>
+  <button class="send-request-button" (click)="sendRequest()">Send Request</button>
+  <p class="response">{{ response }}</p>
+  <div class="chance">
+    Chance to win: 50%
+  </div>
+</div>
