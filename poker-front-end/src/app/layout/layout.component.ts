@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TopBarComponent } from "./top-bar/top-bar.component";
 import { RouterModule } from '@angular/router';
+import { BackgroundService } from '../service/background.service';
 
 @Component({
   selector: 'app-layout',
@@ -11,17 +12,10 @@ import { RouterModule } from '@angular/router';
 })
 export class LayoutComponent {
 
-  constructor() {
-  }
+  constructor(private backgroundService: BackgroundService) {}
 
   ngOnInit() {
-    // this.setBackground(localStorage.getItem('backgroundFileUrl') || '../assets/backgrounds/default.jpg');
+    this.backgroundService.setBackground();
   }
 
-  // setBackground(fileUrl: string) {
-  //   document.body.style.backgroundImage = `url(${fileUrl})`;
-  //   document.body.style.backgroundSize = 'cover';
-  //   // document.body.style.backgroundRepeat = 'no-repeat';
-  //   document.body.style.backgroundPosition = 'center';
-  // }
 }
