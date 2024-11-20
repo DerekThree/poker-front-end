@@ -8,12 +8,12 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
-    // provideAuth0({
-    //   domain: 'dev-31h2sbyz2b3gdxbf.us.auth0.com',
-    //   clientId: 'KpUR9c1zobOzaoKhUBPF45eoTvPx3YkS',
-    //   authorizationParams: {
-    //     redirect_uri: window.location.origin + "/layout/home"
-    //   }
-    // }),
+    provideAuth0({
+      domain: 'dev-31h2sbyz2b3gdxbf.us.auth0.com',
+      clientId: 'KpUR9c1zobOzaoKhUBPF45eoTvPx3YkS',
+      authorizationParams: {
+        redirect_uri: window.location.origin + "/layout/home"
+      }
+    }),
   ]
 };

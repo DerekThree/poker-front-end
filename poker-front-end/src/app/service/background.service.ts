@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { S3Service } from '../service/s3.service';
+import { LoggerService } from './logger.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackgroundService {
 
-  constructor(private s3Service: S3Service) { }
+  constructor(private s3Service: S3Service, private logger: LoggerService) { }
 
   setBackgroundFromFile(filename: string) {
     const body = { username: "user1", filename: filename };
@@ -37,6 +37,6 @@ export class BackgroundService {
   }
 
   private handleError(error: any) {
-    console.error('Error activating file', error);
+    this.logger.error('Error activating file', error);
   }
 }

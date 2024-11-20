@@ -20,6 +20,8 @@
     "@angular/router": "^17.3.0",
     "@auth0/auth0-angular": "^2.2.3",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0-rc.2",
+    "@okta/okta-auth-js": "^7.8.1",
+    "@okta/okta-signin-widget": "^7.25.1",
     "@types/node": "^22.7.7",
     "aws-sdk": "^2.1691.0",
     "bootstrap": "^5.3.3",

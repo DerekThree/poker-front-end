@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { LoggerService } from '../../service/logger.service';
 
 @Component({
   selector: 'app-settings-page',
@@ -12,7 +13,7 @@ import { CommonModule } from '@angular/common';
 export class SettingsPageComponent {
   filenames: string[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private logger: LoggerService) {}
 
   ngAfterViewInit() {
     this.fetchBucketFiles();
@@ -25,7 +26,7 @@ export class SettingsPageComponent {
         this.filenames = data.fileNames;
       },
       error => {
-        console.error('Error fetching files', error);
+        this.logger.error('Error fetching files', error);
       }
     );
   }
@@ -37,13 +38,13 @@ export class SettingsPageComponent {
         this.filenames = data.fileNames;
       },
       error => {
-        console.error('Error fetching files', error);
+        this.logger.error('Error fetching files', error);
       }
     );
   }
 
   uploadFile() {
-    console.log("uploading file");
+    this.logger.debug("uploading file");
     const fileInput = document.getElementById('fileUpload') as HTMLInputElement;
     if (fileInput.files && fileInput.files.length > 0) {
       const file = fileInput.files[0];
@@ -56,7 +57,7 @@ export class SettingsPageComponent {
           this.fetchBucketFiles();
         },
         error => {
-          console.error('Error uploading file', error);
+          this.logger.error('Error uploading file', error);
         }
       );
     }
@@ -73,7 +74,7 @@ export class SettingsPageComponent {
         document.body.style.backgroundRepeat = 'no-repeat';
       },
       error => {
-        console.error('Error activating file', error);
+        this.logger.error('Error activating file', error);
       }
     );
   }

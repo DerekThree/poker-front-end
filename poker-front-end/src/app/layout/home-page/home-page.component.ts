@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { CardComponent } from './card/card.component';
 import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
+import { LoggerService } from '../../service/logger.service';
 
 @Component({
   selector: 'app-home-page',
@@ -27,13 +28,13 @@ export class HomePageComponent {
   suits = ['♥', '♠', '♦', '♣'];
   values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private logger: LoggerService) {}
 
   sendRequest() {
     this.http.post('http://localhost:8080/v1/poker/hand', this.cards, { responseType: 'text' })
       .subscribe((res: string) => {
         this.response = res;
-        console.log("Response: " + res);
+        this.logger.debug("Response: " + res);
       });
   }
 

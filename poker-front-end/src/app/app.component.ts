@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TopBarComponent } from "./layout/top-bar/top-bar.component";
-import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +11,7 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class AppComponent {
 
-  // constructor(public auth: AuthService) {}
-  constructor() {}
+  // constructor() {}
 
 
   // constructor() {
