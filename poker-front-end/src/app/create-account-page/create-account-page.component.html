@@ -1,1 +1,39 @@
-<p>create-account-page works!</p>
+<div class="page">
+  <h1>{{ title }}</h1>
+  <div class="create-account-container">
+    <h2>Create Account</h2>
+    <form [formGroup]="createAccountForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" formControlName="firstName" />
+        <div *ngIf="createAccountForm.get('firstName')?.invalid && createAccountForm.get('firstName')?.touched">
+          First name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" formControlName="lastName" />
+        <div *ngIf="createAccountForm.get('lastName')?.invalid && createAccountForm.get('lastName')?.touched">
+          Last name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" />
+        <div *ngIf="createAccountForm.get('email')?.invalid && createAccountForm.get('email')?.touched">
+          <div *ngIf="createAccountForm.get('email')?.errors?.['required']">Email is required.</div>
+          <div *ngIf="createAccountForm.get('email')?.errors?.['email']">Invalid email format.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" formControlName="password" />
+        <div *ngIf="createAccountForm.get('password')?.invalid && createAccountForm.get('password')?.touched">
+          <div *ngIf="createAccountForm.get('password')?.errors?.['required']">Password is required.</div>
+          <div *ngIf="createAccountForm.get('password')?.errors?.['minlength']">Password must be at least 4 characters long.</div>
+        </div>
+      </div>
+      <button type="submit" [disabled]="createAccountForm.invalid">Create Account</button>
+    </form>
+  </div>
+</div>

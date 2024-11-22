@@ -7,13 +7,13 @@ import { CreateAccountPageComponent } from './create-account-page/create-account
 import { AppComponent } from './app.component';
 
 export const routes: Routes = [
-  // { path: '', component: AppComponent },
+  { path: '', component: HomePageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'create-account', component: CreateAccountPageComponent },
-  { path: 'layout', component: LayoutComponent, children: [
-      { path: 'home', component: HomePageComponent }, 
+  // { path: 'layout', component: LayoutComponent, children: [
+      // { path: 'home', component: HomePageComponent }, 
       { path: 'settings', component: SettingsPageComponent },
-    ]
-  }, 
-  { path: '**', redirectTo: 'login' }
+    // ]
+  // }, 
+  // { path: '**', redirectTo: 'login' }
 ];

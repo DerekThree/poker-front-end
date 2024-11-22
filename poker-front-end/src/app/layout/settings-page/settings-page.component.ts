@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { LoggerService } from '../../service/logger.service';
+import { TopBarComponent } from "../top-bar/top-bar.component";
 
 @Component({
   selector: 'app-settings-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TopBarComponent ],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.css'
 })

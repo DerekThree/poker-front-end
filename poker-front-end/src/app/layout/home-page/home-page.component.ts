@@ -5,11 +5,12 @@ import { CardComponent } from './card/card.component';
 import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { LoggerService } from '../../service/logger.service';
+import { TopBarComponent } from "../top-bar/top-bar.component";
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [ CardComponent, CommonModule, FormsModule],
+  imports: [ CardComponent, CommonModule, FormsModule, TopBarComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
