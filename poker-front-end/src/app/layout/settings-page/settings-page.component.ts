@@ -14,7 +14,7 @@ import { S3Service } from '../../service/s3.service';
   styleUrl: './settings-page.component.css'
 })
 export class SettingsPageComponent {
-  filenames: string[] = [];
+  files: { name: string, url: string }[] = [];
 
   constructor(private http: HttpClient,
               private logger: LoggerService,
@@ -29,7 +29,7 @@ export class SettingsPageComponent {
   fetchBucketFiles() {
     this.s3Service.fetchBucketFiles().subscribe(
       data => {
-        this.filenames = data.fileNames;
+        this.files = data.files;
       },
       error => {
         this.logger.error('Error fetching files', error);
@@ -69,5 +69,20 @@ export class SettingsPageComponent {
 
   async activateFile(filename: string) {
     this.backgroundService.setBackgroundFromFile(filename);
+  }
+
+  downloadFile(fileUrl: string) {
+    this.http.get(fileUrl, { responseType: 'blob' }).subscribe((blob: Blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      // a.download = this.getFileNameFromUrl(fileUrl);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }, error => {
+      console.error('Error downloading file:', error);
+    });
   }
 }

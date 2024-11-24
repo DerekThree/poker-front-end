@@ -25,11 +25,11 @@
           <th class="header">Activate</th>
       </thead>
       <tbody>
-        <tr *ngFor="let filename of filenames">
-          <td>{{ filename }}</td>
-          <td><button (click)="deleteFile(filename)" class="custom-button">Delete</button></td>
-          <td><button (click)="deleteFile(filename)" class="custom-button">Delete</button></td>
-          <td><button (click)="activateFile(filename)" class="custom-button">Activate</button></td>
+        <tr *ngFor="let file of files">
+          <td>{{ file.name }}</td>
+          <td><button (click)="downloadFile(file.url)" class="custom-button">Download</button></td>
+          <td><button (click)="deleteFile(file.name)" class="custom-button">Delete</button></td>
+          <td><button (click)="activateFile(file.name)" class="custom-button">Activate</button></td>
         </tr>
       </tbody>    </table>
   </div>
