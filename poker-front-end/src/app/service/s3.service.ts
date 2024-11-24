@@ -10,7 +10,6 @@ export class S3Service {
 
   constructor(private http: HttpClient) { }
 
-
   fetchBucketFiles(): Observable<any> {
     const body = { username: 'user1' };
     return this.http.post(this.baseUrl + '/v1/s3/getFiles', body);

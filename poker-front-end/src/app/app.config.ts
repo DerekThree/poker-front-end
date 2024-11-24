@@ -14,7 +14,8 @@ export const appConfig: ApplicationConfig = {
       domain: 'dev-53087663.okta.com',
       clientId: '0oalbt44hwuhRa12x5d7',
       authorizationParams: {
-        redirect_uri: window.location.origin
+        redirect_uri: 'https://localhost:4200',
+        pkce: true
       }
     }),
   ]

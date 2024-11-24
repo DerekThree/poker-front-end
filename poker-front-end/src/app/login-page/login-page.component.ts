@@ -25,11 +25,15 @@ export class LoginPageComponent {
 
   async onSubmit() {
     this.logger.debug('Username: ' + this.username);
-    this.logger.debug('Password: ' + this.password);
-    await this.authService.login(this.username, this.password);
+    await this.authService.loginWithCredentials(this.username, this.password);
   }
 
   async logout() {
     await this.authService.logout();
+    this.logger.info('Logged out');
+  }
+
+  async loginWithGoogle() {
+    await this.authService.LoginWithGoogle();
   }
 }

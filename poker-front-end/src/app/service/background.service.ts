@@ -10,7 +10,6 @@ export class BackgroundService {
   constructor(private s3Service: S3Service, private logger: LoggerService) { }
 
   setBackgroundFromFile(filename: string) {
-    const body = { username: "user1", filename: filename };
     this.s3Service.setActiveBackground(filename).subscribe(
       this.setBackgroundFromBlob,
       this.handleError

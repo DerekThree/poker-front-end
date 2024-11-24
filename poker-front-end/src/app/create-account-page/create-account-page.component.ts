@@ -31,7 +31,7 @@ export class CreateAccountPageComponent {
   async onSubmit() {
     if (this.createAccountForm.valid) {
       const { firstName, lastName, email, password } = this.createAccountForm.value;
-      await this.authService.register(firstName, lastName, email, password);
+      await this.authService.registerWithCredentials(firstName, lastName, email, password);
     }
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '@auth0/auth0-angular';
+import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,6 +21,6 @@ export class TopBarComponent {
   }
 
   async logout() {
-    await this.authService.logout();
+    this.authService.logout();
   }
 }
