@@ -71,11 +71,12 @@ export class SettingsPageComponent {
     this.backgroundService.setBackgroundFromFile(filename);
   }
 
-  downloadFile(fileUrl: string) {
+  downloadFile(fileUrl: string, fileName: string) {
     this.http.get(fileUrl, { responseType: 'blob' }).subscribe((blob: Blob) => {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
+      a.download = fileName;
       // a.download = this.getFileNameFromUrl(fileUrl);
       document.body.appendChild(a);
       a.click();
