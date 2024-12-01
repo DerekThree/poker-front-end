@@ -22,6 +22,6 @@ export class TopBarComponent {
 
   async logout() {
     this.authService.logout();
-    localStorage.setItem('isAuthenticated', 'false');
+    // localStorage.setItem('isAuthenticated', 'false');
   }
 }

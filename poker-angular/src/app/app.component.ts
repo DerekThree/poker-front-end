@@ -21,12 +21,12 @@ export class AppComponent implements OnInit {
       map((s: AuthState) => s.isAuthenticated ?? false)
     );
 
-    if (localStorage.getItem('isAuthenticated') === 'true'){
-      this._router.navigate(['/home']);
-    }
-    else {
-      this._router.navigate(['/login']);
-    }
+    // if (localStorage.getItem('isAuthenticated') === 'true'){
+    //   this._router.navigate(['/home']);
+    // }
+    // else {
+    //   this._router.navigate(['/login']);
+    // }
   }
 
 }

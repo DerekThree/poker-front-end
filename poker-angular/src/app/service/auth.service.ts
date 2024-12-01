@@ -49,10 +49,33 @@ export class AuthService {
 
   async LoginWithGoogle() {
     try {
+      this.logger.debug('Logging in with Google');
+
+      const codeVerifier = this._oktaAuth.pkce.generateVerifier('prefix');
+      localStorage.setItem('codeVerifier', codeVerifier);
+      const codeChallenge = await this._oktaAuth.pkce.computeChallenge(codeVerifier);
+      
       await this._oktaAuth.signInWithRedirect({
-        responseType: ['code'],
+        responseType: 'code',
+        codeChallenge: codeChallenge,
+        codeVerifier: codeVerifier,
+        codeChallengeMethod: 'S256',
+        responseMode: 'fragment',
+        state: 'TEST',
+        nonce: 'TEST',
         scopes: ['openid', 'profile', 'email'],
-        idp: '0oald4vpnbe1z2mVY5d7' // Google
+        idp: '0oald4vpnbe1z2mVY5d7', // Google
+
+      });
+
+
+      this._oktaAuth.isAuthenticated().then((isAuthenticated) => {
+        if (isAuthenticated) {
+          console.log('isAuthenticated from Google');
+        }
+        else {
+          console.log('is Not Authenticated from Google');
+        }
       });
       // this.router.navigate(['/home']);
     } catch (err) {
@@ -65,9 +88,9 @@ export class AuthService {
     await this._oktaAuth.signOut({
       postLogoutRedirectUri: window.location.origin + '/login'
     });
-    this._oktaAuth.tokenManager.clear(); // Clear tokens
-    sessionStorage.clear(); // Clear session storage
-    localStorage.setItem('isAuthenticated', 'false');
+    this._oktaAuth.tokenManager.clear(); 
+    sessionStorage.clear(); 
+    // localStorage.setItem('isAuthenticated', 'false');
   }
 
   // async isAuthenticated(): Promise<boolean> {

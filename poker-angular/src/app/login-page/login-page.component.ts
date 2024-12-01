@@ -45,7 +45,6 @@ export class LoginPageComponent {
         this.logger.debug("Access token: ", authToken);
       } else {
         this.logger.debug("User is not authenticated in login page");
-        // this.router.navigate(['/login']);
       }
     });
   }
@@ -53,17 +52,9 @@ export class LoginPageComponent {
   async onSubmit() {
     this.logger.debug('Username: ' + this.username);
     await this._authService.loginWithCredentials(this.username, this.password);
-    localStorage.setItem('isAuthenticated', 'true');
-    // this.router.navigate(['/home']);
   }
-
-  // async logout() {
-  //   await this._authService.logout();
-  //   this.logger.info('Logged out');
-  // }
 
   async loginWithGoogle() {
     await this._authService.LoginWithGoogle();
-    localStorage.setItem('isAuthenticated', 'true');
   }
 }
