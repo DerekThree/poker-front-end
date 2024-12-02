@@ -51,3 +51,8 @@ h1 {
 .header {
   padding: .5rem;
 }
+
+.filename {
+  word-wrap: break-word;
+  word-break: break-all;
+}

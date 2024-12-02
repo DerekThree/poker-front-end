@@ -6,14 +6,15 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { CreateAccountPageComponent } from './create-account-page/create-account-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { CallBackComponent} from './call-back/call-back.component';
+import { authGuard } from './service/auth/auth.guard'; // Adjust the path as necessary
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
-  { path: 'home', component: HomePageComponent },
+  { path: 'home', component: HomePageComponent, canActivate: [authGuard]  },
   { path: 'login', component: LoginPageComponent },
   { path: 'create-account', component: CreateAccountPageComponent },
   { path: 'callback', component: CallBackComponent },
-  { path: 'settings', component: SettingsPageComponent },
+  { path: 'settings', component: SettingsPageComponent, canActivate: [authGuard]  },
 
 ];
 

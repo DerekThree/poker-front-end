@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../service/auth.service';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { AuthService } from '../service/auth/auth.service';
+// import { ReactiveFormsModule } from '@angular/forms';
+// import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-account-page',
-  // standalone: true,
-  // imports: [ ReactiveFormsModule, CommonModule ],
   templateUrl: './create-account-page.component.html',
   styleUrls: ['./create-account-page.component.css']
 })

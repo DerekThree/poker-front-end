@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BackgroundService } from '../service/background.service';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../service/auth/auth.service';
 import { LoggerService } from '../service/logger.service';
 import { OktaAuthStateService, OKTA_AUTH } from '@okta/okta-angular';
 import { filter, map, Observable } from 'rxjs';
@@ -19,7 +19,7 @@ export class LoginPageComponent {
   username: string = '';
   password: string = '';
 
-  public isAuthenticated$!: Observable<boolean>;
+  // public isAuthenticated$!: Observable<boolean>;
 
   constructor(private _authService: AuthService,
               private logger: LoggerService,
@@ -33,20 +33,20 @@ export class LoginPageComponent {
   ngOnInit() {
     document.body.style.backgroundImage = 'url(../assets/backgrounds/default.jpg)';
 
-    this.isAuthenticated$ = this._oktaStateService.authState$.pipe(
-      filter((s: AuthState) => !!s),
-      map((s: AuthState) => s.isAuthenticated ?? false)
-    );
+    // this.isAuthenticated$ = this._oktaStateService.authState$.pipe(
+    //   filter((s: AuthState) => !!s),
+    //   map((s: AuthState) => s.isAuthenticated ?? false)
+    // );
 
-    this.isAuthenticated$.subscribe(async isAuthenticated => {
-      if (isAuthenticated.valueOf()) {
-        this.logger.debug("User is authenticated in login page");
-        const authToken = await this._oktaAuth.tokenManager.get('accessToken');
-        this.logger.debug("Access token: ", authToken);
-      } else {
-        this.logger.debug("User is not authenticated in login page");
-      }
-    });
+    // this.isAuthenticated$.subscribe(async isAuthenticated => {
+    //   if (isAuthenticated.valueOf()) {
+    //     this.logger.debug("User is authenticated in login page");
+    //     const authToken = await this._oktaAuth.tokenManager.get('accessToken');
+    //     this.logger.debug("Access token: ", authToken);
+    //   } else {
+    //     this.logger.debug("User is not authenticated in login page");
+    //   }
+    // });
   }
 
   async onSubmit() {

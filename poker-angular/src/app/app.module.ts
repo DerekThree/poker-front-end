@@ -8,6 +8,8 @@ import { CreateAccountPageComponent } from './create-account-page/create-account
 import { LoginPageComponent } from './login-page/login-page.component';
 import { CardComponent } from './home-page/card/card.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
+import { CallBackComponent} from './call-back/call-back.component';
+import { AuthInterceptorService } from './service/auth/auth-interceptor.service'; // Adjust the path as necessary
 
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CallBackComponent} from './call-back/call-back.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-53087663.okta.com/oauth2/default',
@@ -48,7 +50,13 @@ const oktaAuth = new OktaAuth({
   ],
   providers: [
     { provide: OKTA_CONFIG, useValue: { oktaAuth } },
-    { provide: OKTA_AUTH, useValue: oktaAuth }],
+    { provide: OKTA_AUTH, useValue: oktaAuth },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {/*...*/}

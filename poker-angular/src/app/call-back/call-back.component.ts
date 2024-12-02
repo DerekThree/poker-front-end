@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { LoggerService } from '../service/logger.service';
+import { AuthService } from '../service/auth/auth.service';
 
 @Component({
   selector: 'app-call-back',
@@ -13,6 +14,7 @@ export class CallBackComponent implements OnInit {
   constructor(private oktaAuthStateService: OktaAuthStateService,
               private router: Router, 
               @Inject(OKTA_AUTH) private _oktaAuth: OktaAuth,
+              private authService: AuthService,
               private logger: LoggerService,
             ) {}
 
@@ -20,19 +22,35 @@ export class CallBackComponent implements OnInit {
     try {
       // Handle the authentication response and set the tokens in the token manager
       this.logger.debug('Handling authentication response...');
-      const status = await this._oktaAuth.authn.status;//.token.parseFromUrl();
+      const status = this._oktaAuth.authn.status;
       this.logger.debug('status: ', status);
 
-      this.logger.debug('window.location.search: ', window.location.toString());
       const code = window.location.toString().split('code=')[1].split('&')[0];
       this.logger.debug('code: ', code);
       const tokens = await this._oktaAuth.token.exchangeCodeForTokens({
         authorizationCode: code,
         codeVerifier: localStorage.getItem('codeVerifier') || undefined,
       });
-      this._oktaAuth.tokenManager.setTokens(tokens.tokens);
       this.logger.debug('tokens: ', tokens);
       this._oktaAuth.tokenManager.setTokens(tokens.tokens);
+
+      this._oktaAuth.isAuthenticated().then((isAuthenticated) => {
+        if (isAuthenticated) {
+          console.log('isAuthenticated from Google');
+          const authToken = this._oktaAuth.tokenManager.getTokens().then((tokens) => {
+            const name = tokens.idToken?.claims.name;
+            const firstName = name ? name.split(' ')[0] : '';
+            const lastName = name ? name.split(' ')[1] : '';
+            const email = tokens.idToken?.claims.email;
+            const username = email ? email : '';
+            this.authService.registerWithIdp(firstName, lastName, username);
+          });
+          this.logger.debug("Access token: ", authToken);
+        }
+        else {
+          console.log('is Not Authenticated from Google');
+        }
+      });
 
       // Redirect to the home page
       this.router.navigate(['/home']);

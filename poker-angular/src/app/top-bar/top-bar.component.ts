@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../service/auth/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -22,6 +22,5 @@ export class TopBarComponent {
 
   async logout() {
     this.authService.logout();
-    // localStorage.setItem('isAuthenticated', 'false');
   }
 }

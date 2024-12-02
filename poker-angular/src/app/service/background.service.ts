@@ -16,7 +16,7 @@ export class BackgroundService {
     );
   }
 
-  setBackground() {
+  setActiveBackground() {
     this.s3Service.getActiveBackground().subscribe(
       this.setBackgroundFromBlob,
       (error) => this.logger.error('Error activating file', error)

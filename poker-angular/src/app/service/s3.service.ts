@@ -11,18 +11,17 @@ export class S3Service {
   constructor(private http: HttpClient) { }
 
   fetchBucketFiles(): Observable<any> {
-    const body = { username: 'user1' };
-    return this.http.post(this.baseUrl + '/v1/s3/getFiles', body);
+    // const body = { username: 'user1' };
+    return this.http.post(this.baseUrl + '/v1/s3/getFiles', {});
   }
 
   getUploadUrl(filename: string): Observable<string> {
-    const body = { username: 'user1', filename };
+    const body = { filename };
     return this.http.post(`${this.baseUrl}/v1/s3/getUploadUrl`, body, { responseType: 'text' });
   }
 
   async uploadFile(file: File): Promise<Observable<any>> {
     try {
-      
       const uploadUrl = await this.getUploadUrl(file.name).toPromise();
       if (!uploadUrl) {
         throw new Error('Failed to get upload URL');
@@ -45,25 +44,18 @@ export class S3Service {
     return this.fetchBucketFiles();
   }
   
-  // uploadFile(file: File): Observable<any>  {
-  //   const formData = new FormData();
-  //   formData.append('username', 'user1');
-  //   formData.append('file', file);
-  //   return this.http.post(this.baseUrl + '/v1/s3/uploadFile', formData)
-  // }
-  
   deleteFile(filename: string): Observable<any>  {
-    const body = { username: 'user1', filename: filename };
+    const body = { filename };
     return this.http.post<{ fileNames: string[] }>(this.baseUrl + '/v1/s3/deleteFile', body);
   }
 
   getActiveBackground(): Observable<any>   {
-    const body = { username: "user1" };
-    return this.http.post(this.baseUrl + '/v1/background/getActive', body, { responseType: 'blob' });
+    // const body = { username: "user1" };
+    return this.http.post(this.baseUrl + '/v1/background/getActive', {}, { responseType: 'blob' });
   }
   
   setActiveBackground(filename: string): Observable<any>   {
-    const body = { username: "user1", filename: filename };
+    const body = { filename };
     return this.http.post(this.baseUrl + '/v1/background/setActive', body, { responseType: 'blob' });
   }
 

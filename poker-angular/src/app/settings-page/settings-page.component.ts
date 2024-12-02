@@ -22,7 +22,7 @@ export class SettingsPageComponent {
               private s3Service: S3Service) {}
 
   ngOnInit() {
-    this.backgroundService.setBackground();
+    this.backgroundService.setActiveBackground();
     this.fetchBucketFiles();
   }
   
@@ -37,19 +37,7 @@ export class SettingsPageComponent {
     );
   }
 
-  deleteFile(filename: string) {
-    this.s3Service.deleteFile(filename).subscribe(
-      files => {
-        this.files = files;
-      },
-      error => {
-        this.logger.error('Error deleting file', error);
-      }
-    );
-  }
-
   async uploadFile() {
-  
     this.logger.debug("uploading file");
     const fileInput = document.getElementById('fileUpload') as HTMLInputElement;
     if (fileInput.files && fileInput.files.length > 0) {
@@ -67,17 +55,30 @@ export class SettingsPageComponent {
     }
   }
 
+  deleteFile(filename: string) {
+    this.s3Service.deleteFile(filename).subscribe(
+      files => {
+        this.files = files;
+      },
+      error => {
+        this.logger.error('Error deleting file', error);
+      }
+    );
+  }
+
   async activateFile(filename: string) {
     this.backgroundService.setBackgroundFromFile(filename);
+    this.fetchBucketFiles();
   }
 
   downloadFile(fileUrl: string, fileName: string) {
+    const FileNameWithoutPrefix = fileName.substring(fileName.lastIndexOf('/') + 1);
+
     this.http.get(fileUrl, { responseType: 'blob' }).subscribe((blob: Blob) => {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = fileName;
-      // a.download = this.getFileNameFromUrl(fileUrl);
+      a.download = FileNameWithoutPrefix;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

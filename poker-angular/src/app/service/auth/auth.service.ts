@@ -1,17 +1,16 @@
 import { Inject, Injectable } from '@angular/core';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { Router } from '@angular/router';
-import { LoggerService } from './logger.service';
+import { LoggerService } from '../logger.service';
 import { IdxStatus } from '@okta/okta-auth-js';
 import { HttpErrorResponse } from '@angular/common/http';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { OKTA_AUTH } from '@okta/okta-angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // private oktaAuth: OktaAuth;
   private baseUrl = 'http://localhost:8080';
 
   constructor(private logger: LoggerService,
@@ -50,11 +49,11 @@ export class AuthService {
   async LoginWithGoogle() {
     try {
       this.logger.debug('Logging in with Google');
-
       const codeVerifier = this._oktaAuth.pkce.generateVerifier('prefix');
       localStorage.setItem('codeVerifier', codeVerifier);
       const codeChallenge = await this._oktaAuth.pkce.computeChallenge(codeVerifier);
       
+      // Redirect to Callback component
       await this._oktaAuth.signInWithRedirect({
         responseType: 'code',
         codeChallenge: codeChallenge,
@@ -63,44 +62,13 @@ export class AuthService {
         responseMode: 'fragment',
         state: 'TEST',
         nonce: 'TEST',
-        scopes: ['openid', 'profile', 'email'],
+        scopes: [ 'openid', 'profile' ],
         idp: '0oald4vpnbe1z2mVY5d7', // Google
-
       });
-
-
-      this._oktaAuth.isAuthenticated().then((isAuthenticated) => {
-        if (isAuthenticated) {
-          console.log('isAuthenticated from Google');
-        }
-        else {
-          console.log('is Not Authenticated from Google');
-        }
-      });
-      // this.router.navigate(['/home']);
+      
     } catch (err) {
       this.logger.error(JSON.stringify(err));
     }
-  }
-
-  async logout() {
-    this.logger.debug('Logging out');
-    await this._oktaAuth.signOut({
-      postLogoutRedirectUri: window.location.origin + '/login'
-    });
-    this._oktaAuth.tokenManager.clear(); 
-    sessionStorage.clear(); 
-    // localStorage.setItem('isAuthenticated', 'false');
-  }
-
-  // async isAuthenticated(): Promise<boolean> {
-  //   return !!(await this._oktaAuth.tokenManager.get('accessToken'));
-  // }
-
-  async isAuthenticated(): Promise<boolean> {
-    const accessToken = await this._oktaAuth.tokenManager.get('accessToken');
-    const idToken = await this._oktaAuth.tokenManager.get('idToken');
-    return !!(accessToken && idToken);
   }
 
   async registerWithCredentials(firstName: string, lastName: string, username: string, password: string ) {
@@ -116,17 +84,15 @@ export class AuthService {
       }
     };
     
+    const headers = new HttpHeaders({
+      'X-Username': username
+    });
+
     try {
-      const response = await this.http.post(this.baseUrl + '/v1/user/register', body).toPromise();
-      // const response = await this.http.post(url, body, { headers }).toPromise();
-      // this.oktaAuth.idx.register(body);
+      const response = await this.http.post(this.baseUrl + '/v1/user/register', body, { headers }).toPromise();
       this.loginWithCredentials(username, password);
       this.logger.info('User created and activated successfully:', response);
-    } catch (error) {
-      this.logger.error('Error creating user:', error);
-      const response = error as HttpErrorResponse;
-      alert('Error creating user: ' + response.error);
-    }
+    } catch (error) {}
   }
 
   async registerWithIdp(firstName: string, lastName: string, username: string) {
@@ -142,30 +108,29 @@ export class AuthService {
     try {
       const response = await this.http.post(this.baseUrl + '/v1/user/register', body).toPromise();
       this.logger.info('User created and activated successfully:', response);
-    } catch (error) {
-      this.logger.error('Error creating user:', error);
-      const response = error as HttpErrorResponse;
-      alert('Error creating user: ' + response.error);
-    }
+    } catch (error) {}
   }
 
-  async handleAuthentication() {
-    const tokens = await this._oktaAuth.token.parseFromUrl();
-    this._oktaAuth.tokenManager.setTokens({
-      accessToken: tokens.tokens.accessToken,
-      idToken: tokens.tokens.idToken,
-      refreshToken: tokens.tokens.refreshToken
+  // async handleAuthentication() {
+  //   const tokens = await this._oktaAuth.token.parseFromUrl();
+  //   this._oktaAuth.tokenManager.setTokens({
+  //     accessToken: tokens.tokens.accessToken,
+  //     idToken: tokens.tokens.idToken,
+  //   });
+  // }
+  
+  async isAuthenticated(): Promise<boolean> {
+    const accessToken = await this._oktaAuth.tokenManager.get('accessToken');
+    const idToken = await this._oktaAuth.tokenManager.get('idToken');
+    return !!(accessToken && idToken);
+  }
+
+  async logout() {
+    this.logger.debug('Logging out');
+    await this._oktaAuth.signOut({
+      postLogoutRedirectUri: window.location.origin + '/login'
     });
-  }
-
-  async getUsername(): Promise<string | null> {
-    try {
-      const user = await this._oktaAuth.getUser();
-      this.logger.info('User: ', user);
-      return user ? String(user.email || user.preferred_username || user['login']) : null;
-    } catch (err) {
-      this.logger.error('Error getting user info:', err);
-      return null;
-    }
+    this._oktaAuth.tokenManager.clear(); 
+    sessionStorage.clear(); 
   }
 }
